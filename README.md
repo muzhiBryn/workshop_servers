@@ -1,16 +1,26 @@
-# CS52 Workshops:  TITLE OF YOUR WORKSHOP
+# CS52 Workshops:  ALTERNATIVE SERVERS
 
-![](http://i.giphy.com/eUh8NINbZf9Ys.gif)
-
-Brief motivation here as well as in presentation
+Are you tired of Javascript? Of semicolons and curly braces?
+![standing up gif](https://media.giphy.com/media/eoN5fHRfV4sSI/giphy.gif)
+Do you remember this other language from CS1? What was it called again. Ah yes, Python?
+![yes gif](https://media.giphy.com/media/Pd8Bf06Sas4yQ/giphy.gif)
+Have you ever thought of, wondered perhaps, or imagined using Google Sheets as a database?
+![intriguing gif](https://media.giphy.com/media/l1IY1H0spBYSkhuJG/giphy.gif)
+How do you feel?
+![cat wearing sunglasses](https://media.giphy.com/media/CjmvTCZf2U3p09Cn0h/giphy.gif)
 
 ## Overview
 
-Summary of what we're about to do.
+In this tutorial we're going to use a few things:
+1. The Python requests library. Guaranteed much cooler than axios.
+2. Google Forms and Google Sheets. Why? For our "frontend" and our "database". Yes, but why? Because...
+Because Google Forms is an extremely popular way of collecting data. Yes if we were developing our own site, we would probably set up an HTML form and use an actual database. But sometimes as developers we're not the ones collecting the data. Also, think about it, you have to send out a survey real quick, do you create a Google Form, or go full stack?
+3. Of course, Flask!
 
 ## Setup
-
-Any necessary setup steps
+1. Go [here](https://www.google.com/forms/about/) and create a Google Form. Anything really. (Or if you've created a Google Form in the past with some cool data and you'd like to reuse it, go ahead)
+Here's ours! (TODO: create form)
+2. Install Flask (TODO: flask installation steps/maybe github repo with everything involved)
 
 ## Step by Step
 
