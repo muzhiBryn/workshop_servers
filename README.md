@@ -26,7 +26,7 @@ pip install Flask
 python -m pip install pymongo
 ```
 
-2. If you read Flask tutorials, you'll see that a lot of them use virtual environments. We will not be doing that in this tutorial. You're welcome to. The benefit is that it (*insert benefit)
+2. If you read Flask tutorials, you'll see that a lot of them use virtual environments. We will not be doing that in this tutorial. The benefit of virtual environments is that it you can work on isolated projects with different dependencies at the same time. So, if you are already using a different version of flask, feel free to use virtual environments!
 3. Get an API key for Google Books. We've done this a bunch of times, from YouTube to the ML tutorial. Go [here](https://console.developers.google.com/), in APIs and Services, search for Books. Enable the API. Then to to Credentials. Click on Create Credentials, select api key, restrict it to the Books API, then write it down somewhere.
 4. Phew. Now we're ready.
 
@@ -60,7 +60,7 @@ bookshelf = db.bookshelf
 </details>
 The variable names could be literally anything. In our example, if you open up MongoDB Compass (or use the CLI), you'll find that there is now a database called database, and inside that, there is a collection called bookshelf.
 
-And that's it for the model. We're not going to create a Schema. We're just going to go ahead and throw data into it. (TODO: justify it)
+And that's it for the model. We're not going to create a Schema. We're just going to go ahead and throw data into it.
 
 #### Controller
 We're still in db.py. We want the functions that will directly manipulate our database now. Can you think of any? Well, we're going to be searching for books with the Books API, and then we'll add those to our library. We'll also want to be able to kick books out of our library. Yep, add and kick functions. Or delete, if you want to be boring. Mongoose, I mean, pymongo, has methods called insert_one, and delete_one. :smiling_imp: They behave like pymongo, I mean, mongoose.
@@ -175,38 +175,18 @@ if __name__ == '__main__':
     app.run()
  ```
 
- ### Templates
+### Congrats!
 
-![screen shots are helpful](img/screenshot.png)
-
-:sunglasses: GitHub markdown files [support emoji notation](http://www.emoji-cheat-sheet.com/)
-
-Here's a resource for [github markdown](https://guides.github.com/features/mastering-markdown/).
-
-## Use collapsible sections when you are giving away too much code
-<details>
- <summary>Click to expand!</summary>
- 
- ```js
- // some code
- console.log('hi');
- ```
-</details>
-
-
+Awesome! You deployed a Flask app!
+![final](img/final.png)
 
 ## Summary / What you Learned
 
-* [ ] can be checkboxes
+* [ ] Deploy a web app using the Flask framework
+* [ ] Using Mongodb to store data with the pymongo package
+* [ ] Routing with an API in Flask
 
 ## Reflection
 
-*2 questions for the workshop participants to answer (very short answer) when they submit the workshop. These should try to get at something core to the workshop, the what and the why.*
-
-* [ ] 2 reflection questions
-* [ ] 2 reflection questions
-
-
-## Resources
-
-* cite any resources
+* [ ] Whats the difference between Django, Flask, and Ruby on Rails?
+* [ ] When would you use each of these above frameworks?
