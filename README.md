@@ -175,10 +175,13 @@ if __name__ == '__main__':
     app.run()
  ```
 
-### Congrats!
+### Finally
 
-Awesome! You deployed a Flask app!
+If all went well, it should look something like this:
+
 ![final](img/final.png)
+
+Congrats! You deployed your first Flask app!
 
 ## Summary / What you Learned
 
