@@ -109,13 +109,25 @@ def search_title(name):
 We also want a default search term. So go ahead and call your function on your favourite book title. Assign the results to some variable.
 
 #### routing :smiling_imp:
-This is the fun part. Routing in Flask works like routing in express, except that you are required to return something to the view, even if you just perform an action like delete. For that case, there's a special empty return statement ('', 204) that translates to "all good. nothing to see here". In this tutorial we will construct four routes, only two of which will be accessible by the user.
+This is the fun part. Routing in Flask works like routing in express, except that you are required to return something to the view, even if you just perform an action like delete. For that case, there's a special empty return statement ('', 204) that translates to "all good. nothing to see here". 
+
+We're going to use the `@app.route()` decorator to bind a URL to a function which will return what we want to display. The first argument passed to `route()` will be the url string we are targeting. By default the route will only respond to `GET` requests, but that can be changed by providing the `methods` argument to the route() decorator. After the decorator we will define the function that will return whatever we want to render. For example:  
+
+```python
+@app.route(‘/hello’, methods=['GET', 'POST'])
+def hello_world():
+   return ‘hello world’
+ ```
+ In this tutorial we will construct four routes, only two of which will be accessible by the user.
 1. Home page. This is where the search bar will be.
 2. Book shelf, or library, or favourites.
 3. add/<:id> :smiling_imp:
 4. delete/<:id> :smiling_imp:
 
 ##### Home page
+
+We want to respond to `GET` and `POST` requests. Our function will return the `render_template()` function which will in turn render our template `index.html` (which we will create later). In case of a `POST` request, we also want to retrieve the contents of the `search-bar` and pass that to our `render_template()` function so we render the appropriate books.
+
 <details>
  <summary>try it first</summary>
 
@@ -129,39 +141,42 @@ def home_page():
  ```
 </details>
 
-##### Bookshelf
+##### Favourites
+Here want to respond to `GET` requests on the URL `/favourites` and render our `favs.html` template with all our favourite books.
+<details>
+ <summary>try it first</summary>
+
+ ```python
+@app.route('/favourites')
+def favourites():
+    all = db.get_all()
+    return render_template('favs.html', all=all)
+ ```
+</details>
+
+##### add/<:id>
+Here want to respond to `POST` requests and add the book with the given id to our database. We don't actually want to render anything so we just return the special empty return statement that we mentioned before.
+<details>
+ <summary>try it first</summary>
+
+ ```python
+@app.route('/add/<string:id>', methods=['POST'])
+def add(id):
+    if request.method == 'POST':
+        book = list(filter(lambda b: b["id"] == id, results))[0]
+        db.add_book(book)
+    return ('', 204)
+ ```
+</details>
+
+##### delete/<:id>
+Here want to respond to `DELETE` requests and delete the book with the corresponding id from our database. Again, we don't render anything.
+
 <details>
  <summary>try it first</summary>
 
  ```python
 @app.route('/delete/<string:id>', methods=['DELETE'])
-def delete(id):
-    if request.method == 'DELETE':
-        db.delete_book(id)
-    return ('', 204)
- ```
-</details>
-
-##### add/<:id>
-<details>
- <summary>try it first</summary>
-
- ```python
-@app.route('/', methods=['GET', 'POST'])
-def home_page():
-    global results
-    if request.method == 'POST' and request.form['search-bar']:
-        results = search_title(request.form['search-bar'])
-    return render_template('index.html', results=results)
- ```
-</details>
-
-##### delete/<:id>
-<details>
- <summary>try it first</summary>
-
- ```python
-@app.route('/', methods=['GET', 'POST'])
 def delete(id):
     if request.method == 'DELETE':
         db.delete_book(id)
