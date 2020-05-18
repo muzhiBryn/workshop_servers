@@ -36,107 +36,10 @@ Much of the code we write here will look familiar to Express. Keep an eye out fo
 
 ### File Structure
 Create a directory to work in. Name it whatever you want. In there we're going to create two directories and two files.
-1. The first directory is called templates. This will hold our HTML. It's like views in Express :smiling_imp:
-2. The second directory is called static. This will hold CSS and other static files.
-3. File one is called app.py. It's like server.js :smiling_imp:
-4. File two is called db.py. Yep, you guessed it, it's our model and controller rolled into one. :smiling_imp:
-
-### Templates
-
-First things first, lets kick it off with some good ol' HTML. 
-
-If you haven't already, make a `templates/` directory. We are going to break our HTML up so also add a `partials/` directory inside of `templates/`.
-
-#### Partials
-
-##### Head
-
-We are going to add some cool scripts and styling to let our flask app run and look great!
-
-In our `templates/partials/` directory, make a `templates/partials/head.html` file. 
-
-<details>
- <summary>Go ahead and throw this in there</summary>
-
-```html
-<head>
-    <title>Hot Cocoa</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
-</head>
-```
-</details>
-
-##### Nav
-
-We are also going to make a nav bar that lets us jump to our favorite books in our library. 
-
-Make a new file `templates/partials/nav.html` and add a `nav` element containing a `div`. 
-In this `div`, we are going to want a link to `/` that has `class="brand-logo"` with the text `Home`.
-We also want to have a `ul` with `id="nav-mobile"`, `class="right"` and a `li` with a link to `/favorites`.
- 
-<details>
-<summary>Click here if you forgot all your html :clown_face:</summary>
-
-```html
-<nav>
-    <div>
-      <a href="/" class="brand-logo">Home</a>
-      <ul id="nav-mobile" class="right">
-        <li><a href="/favourites">Favourites</a></li>    
-      </ul>
-    </div>
-  </nav>
-```
-</details>
-
-### Home Page
-
-
-### Favorites Page
-
-### Static
-
-Now, make a 'static/' directory. In that directory, add a 'static/style.css' file and add the styling below into there. 
-
-<details>
- <summary>For brevity's sake, here is some styling:</summary>
-
-```css
-body {
-    background-color: rgb(26, 19, 0);
-    color: rgb(255, 255, 255);
-    margin: 0 10px;
-}
-nav, button {
-    background-color: rgb(105, 6, 13);
-    border-width: 0;
-    border-radius: 8px;
-    padding: 7px;
-}
-h1 {
-    font-size: 25px;
-}
-i {
-    cursor: pointer;
-}
-.shelf {
-    display: flex;
-    flex-flow: row wrap;
-}
-.book {
-    padding: 15px;
-}
-.options {
-    display: flex;
-}
-```
-</details>
-
+1. The first file is called app.py. It's like server.js :smiling_imp:
+2. The second file is called db.py. Yep, you guessed it, it's our model and controller rolled into one. :smiling_imp:
+3. The first directory is called templates. This will hold our HTML. It's like views in Express :smiling_imp:
+4. The second directory is called static. This will hold CSS and other static files.
 
 ### db.py
 Let's start in db.py. If you would like to start with app.py, scroll on ahead, but it can be grounding to know what your database is doing. First we're going to need something from pymongo.
@@ -272,9 +175,354 @@ if __name__ == '__main__':
     app.run()
  ```
 
-### Finally
+### Templates
 
-If all went well, it should look something like this:
+Alright, now that we have our Flask framework setup, let's get back to some good ol' HTML :page_facing_up:. 
+
+If you haven't already, make a `templates/` directory. We are going to break our HTML up so also add a `partials/` directory inside of `templates/`.
+
+#### Partials
+
+In our `templates/partials/` directory, make a `templates/partials/head.html` and `templates/partials/nav.html` file. 
+We are going to essentially use the same `head` and `nav` elements from SA7 but if you forget what they look like here they are:
+
+<details>
+ <summary>head.html</summary>
+
+```html
+<head>
+    <title>Hot Cocoa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
+</head>
+```
+</details>
+
+<details>
+<summary>nav.html</summary>
+
+```html
+<nav>
+    <div>
+      <a href="/" class="brand-logo">Home</a>
+      <ul id="nav-mobile" class="right">
+        <li><a href="/favourites">Favourites</a></li>    
+      </ul>
+    </div>
+  </nav>
+```
+</details>
+
+Now you are all done with your partials!
+
+### Home Page
+
+Now lets move back up to our `templates/` directory. Make a `templates/index.html` file and be sure to include the `partials/head.html` and `partials/nav.html` files that we just made.
+
+<details>
+<summary>If you forget how to include those elements</summary>
+ 
+```html
+<!DOCTYPE html>
+<html>
+    {% include 'partials/head.html' %}
+    <body>
+        {% include 'partials/nav.html' %}
+    </body>
+</html>
+```
+</details>
+
+#### Body
+
+We have a `nav` element but our page is looking a little empty... Let's fix that by adding in a name for our library and some books!
+
+Lets put a `h1` element with the name of your library right below the `nav` element.
+Below this header, add a `div` with `class="shelf"`. We are going to use `Jinja` to use `python` syntax to loop through and get the approriate books. If you think you are a `Jinja` wizard give it a shot, but otherwise here it is:
+
+<details>
+<summary>Your bookshelf</summary>
+
+```html
+<div class="shelf">
+    {% for book in results %}
+    {% if 'imageLinks' in book.volumeInfo %}
+    <div class="book">
+        <div class="options">
+            <p data-id="{{book.id}}" class="delete"><i class="material-icons">delete</i></p>
+            <p data-id="{{book.id}}" class="add"><i class="material-icons">add_circle</i></p>
+        </div>
+        <img src={{ book.volumeInfo.imageLinks.thumbnail }}>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+```
+</details>
+
+
+But wait, we are missing a way to look for books! (What kind of librarian would let this happen...)
+
+##### Search-bar
+
+Under the `h1` element, add a `div` this element will contain a form that sends a post request to `/` that will call the flask function that we made. Put an `input` element and a submit `button` in that form and you are good to go!
+
+<details>
+<summary>Those elements might look like this</summary>
+
+```html
+<h1>Hot Cocoa</h1>
+<div>
+    <form action="/" method="POST">
+        <input type="text" name="search-bar" placeholder="book title">
+        <button type="submit">Search</button>
+    </form>
+</div>
+```
+</details>
+
+##### Script
+
+We also want to keep track of our favorite books or books that we might want to read in the future! Lets add a `script` element below the divs that we just made.
+
+This script will contain two functions one to add a book to our favorites list and one to delete it:
+
+
+<details>
+<summary>Script element</summary>
+ 
+```html
+<script>
+   $('.add').click(function(event) {
+     var id=$(event.currentTarget).data('id');
+       $.ajax({
+           type: "POST",
+           url: "/add/"+id,
+       }).done(function() {location.reload()});
+   });
+   $('.delete').click(function(event) {
+     var id=$(event.currentTarget).data('id');
+       $.ajax({
+           type: "DELETE",
+           url: "/delete/"+id,
+       }).done(function() {location.reload()});
+   });
+</script>
+ ```
+</details
+
+Now you've finished your index.html!
+
+<details>
+<summary>Your templates/index.html should look like this!</summary>
+
+```html
+<!DOCTYPE html>
+<html>
+    {% include 'partials/head.html' %}
+    <body>
+        {% include 'partials/nav.html' %}
+        <h1>Hot Cocoa</h1>
+        <div>
+            <form action="/" method="POST">
+                <input type="text" name="search-bar" placeholder="book title">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="shelf">
+            {% for book in results %}
+            {% if 'imageLinks' in book.volumeInfo %}
+            <div class="book">
+                <div class="options">
+                    <p data-id="{{book.id}}" class="delete"><i class="material-icons">delete</i></p>
+                    <p data-id="{{book.id}}" class="add"><i class="material-icons">add_circle</i></p>
+                </div>
+                <img src={{ book.volumeInfo.imageLinks.thumbnail }}>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <script>
+            $('.add').click(function(event) {
+              var id=$(event.currentTarget).data('id');
+                $.ajax({
+                    type: "POST",
+                    url: "/add/"+id,
+                }).done(function() {location.reload()});
+            });
+            $('.delete').click(function(event) {
+              var id=$(event.currentTarget).data('id');
+                $.ajax({
+                    type: "DELETE",
+                    url: "/delete/"+id,
+                }).done(function() {location.reload()});
+            });
+        </script>
+    </body>
+</html>
+```
+</details>
+
+### Favorites Page
+
+Sweet, now that you have the home page laid out, its time to make a page to display your favorite books!
+Create a new html file, `templates/favs.html`.
+
+#### Body
+
+The `head` and `nav` parts of this page will be the same as the `index.html` so you can start there.
+
+<details>
+<summary>If you already forgot...</summary>
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'partials/head.html' %}
+    </head>
+    <body>
+        {% include 'partials/nav.html' %}
+    </body>
+</html>
+```
+</details>
+
+In our body, below the nav, add a header introducing your favorites.
+
+Below that, we are going to use `Jinja` again to loop through and show all of your favorited books.
+
+If you are not super comfortable with `Jinja` yet, we will give you some code:
+
+<details>
+<summary>Your body will look like this</summary>
+
+```html
+    <body>
+        {% include 'partials/nav.html' %}
+        <h1>Welcome to your favourites</h1>
+        <div class="shelf">
+            {% for book in all %}
+            <div class="book">
+                <div class="options">
+                    <p data-id="{{book.id}}" class="delete"><i class="material-icons">delete</i></p>
+                </div>
+                <img src={{ book.volumeInfo.imageLinks.thumbnail }}>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+```
+</details>
+
+Essentially, the `Jinja` control flow statements `{% for book in all %}` and `{% endfor %}` let us use `python` syntax to run a `for` loop to load multiple elements.
+
+:boom: Cool, right? Yeah I agree!
+
+#### Script
+
+Now that we can display our favorite books, let's add a script that will allow us to remove books from that list as well.
+
+Below your `<body>` add a `<script>` element. 
+We are going to use Ajax to call our python function that deletes elements from our database by using the route established we established in our `app.py`.
+
+<details>
+<summary>Your script should look like this!</summary>
+
+```html
+    <script>
+        $('.delete').click(function(event) {
+          var id=$(event.currentTarget).data('id');
+            $.ajax({
+                type: "DELETE",
+                url: "/delete/"+id,
+            }).done(function() {location.reload()});
+        });
+    </script>
+```
+</details>
+
+Finally:
+
+<details>
+<summary>Your favs.html should look like this</summary>
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'partials/head.html' %}
+    </head>
+    <body>
+        {% include 'partials/nav.html' %}
+        <h1>Welcome to your favourites</h1>
+        <div class="shelf">
+            {% for book in all %}
+            <div class="book">
+                <div class="options">
+                    <p data-id="{{book.id}}" class="delete"><i class="material-icons">delete</i></p>
+                </div>
+                <img src={{ book.volumeInfo.imageLinks.thumbnail }}>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+    <script>
+        $('.delete').click(function(event) {
+          var id=$(event.currentTarget).data('id');
+            $.ajax({
+                type: "DELETE",
+                url: "/delete/"+id,
+            }).done(function() {location.reload()});
+        });
+    </script>
+</html>
+```
+</details>
+
+### Static
+
+Now, make a 'static/' directory. In that directory, add a 'static/style.css' file and add the styling below into there. 
+
+<details>
+ <summary>For brevity's sake, here is some styling:</summary>
+
+```css
+body {
+    background-color: rgb(26, 19, 0);
+    color: rgb(255, 255, 255);
+    margin: 0 10px;
+}
+nav, button {
+    background-color: rgb(105, 6, 13);
+    border-width: 0;
+    border-radius: 8px;
+    padding: 7px;
+}
+h1 {
+    font-size: 25px;
+}
+i {
+    cursor: pointer;
+}
+.shelf {
+    display: flex;
+    flex-flow: row wrap;
+}
+.book {
+    padding: 15px;
+}
+.options {
+    display: flex;
+}
+```
+</details>
+
+:checkered_flag: Finally, if all went well, your page should look something like this:
 
 ![final](img/final.png)
 
@@ -289,4 +537,4 @@ Congrats! You deployed your first Flask app!
 ## Reflection
 
 * [ ] Whats the difference between Django, Flask, and Ruby on Rails?
-* [ ] When would you use each of these above frameworks?
+* [ ] When might you use each of those frameworks?
