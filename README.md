@@ -1,10 +1,12 @@
 # CS52 Workshops:  ALTERNATIVE SERVERS
 
 Do you remember this other language from CS1? What was it called again. Ah yes, Python?
+
 ![yes gif](https://media.giphy.com/media/Pd8Bf06Sas4yQ/giphy.gif)
 
 Are you ready to leave semicolons and curly braces behind?
-![cat wearing sunglasses](https://media.giphy.com/media/CjmvTCZf2U3p09Cn0h/giphy.gif)
+
+![it's about time](https://media.giphy.com/media/jVStxzak9yk2Q/giphy.gif)
 
 ## Overview
 
@@ -88,7 +90,7 @@ Now some flask
 ```python
 app = Flask(__name__)
 ```
-Now, there's so many ways to build our library, but we're going to work like this: We'll write a function that takes a search term and returns a list of objects about books whose titles match that name. Confused, play around with the Books API and see what kind of data it returns. This function is not hard. You will use requests Here's how you use requests:
+Now, there's so many ways to build our library, but we're going to work like this: We'll write a function that takes a search term and returns a list of objects about books whose titles match that name. Confused? Play around with the Books API and see what kind of data it returns. This function is not hard. You will use requests Here's how you use requests:
 ```python
 requests.get(url, params=params)
 ```
@@ -107,7 +109,73 @@ def search_title(name):
 We also want a default search term. So go ahead and call your function on your favourite book title. Assign the results to some variable.
 
 #### routing :smiling_imp:
-This is the fun part 
+This is the fun part. Routing in Flask works like routing in express, except that you are required to return something to the view, even if you just perform an action like delete. For that case, there's a special empty return statement ('', 204) that translates to "all good. nothing to see here". In this tutorial we will construct four routes, only two of which will be accessible by the user.
+1. Home page. This is where the search bar will be.
+2. Book shelf, or library, or favourites.
+3. add/<:id> :smiling_imp:
+4. delete/<:id> :smiling_imp:
+
+##### Home page
+<details>
+ <summary>try it first</summary>
+
+ ```python
+@app.route('/', methods=['GET', 'POST'])
+def home_page():
+    global results
+    if request.method == 'POST' and request.form['search-bar']:
+        results = search_title(request.form['search-bar'])
+    return render_template('index.html', results=results)
+ ```
+</details>
+
+##### Bookshelf
+<details>
+ <summary>try it first</summary>
+
+ ```python
+@app.route('/delete/<string:id>', methods=['DELETE'])
+def delete(id):
+    if request.method == 'DELETE':
+        db.delete_book(id)
+    return ('', 204)
+ ```
+</details>
+
+##### add/<:id>
+<details>
+ <summary>try it first</summary>
+
+ ```python
+@app.route('/', methods=['GET', 'POST'])
+def home_page():
+    global results
+    if request.method == 'POST' and request.form['search-bar']:
+        results = search_title(request.form['search-bar'])
+    return render_template('index.html', results=results)
+ ```
+</details>
+
+##### delete/<:id>
+<details>
+ <summary>try it first</summary>
+
+ ```python
+@app.route('/', methods=['GET', 'POST'])
+def delete(id):
+    if request.method == 'DELETE':
+        db.delete_book(id)
+    return ('', 204)
+ ```
+</details>
+
+At the end of your app.py, add this:
+```python
+if __name__ == '__main__':
+    app.run()
+ ```
+
+ ### Templates
 
 ![screen shots are helpful](img/screenshot.png)
 
