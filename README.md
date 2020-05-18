@@ -15,7 +15,7 @@ In this tutorial we're going to use a few things:
 2. MongoDB (YES!). We'll be using pymongo. It's like mongoose, but for Python.
 3. Oh and, a little framework called Flask
 
-Then we're going to build a library. A...what? A ibrary. Except you can't read the books, just look at them. But that's fun too.
+Then we're going to build a library. A...what? A library. Except you can't read the books, just look at them. But that's fun too.
 
 ## Setup
 
@@ -35,11 +35,108 @@ python -m pip install pymongo
 Much of the code we write here will look familiar to Express. Keep an eye out for the similarities, it'll help in remembering. We'll help you too, with this: :smiling_imp:
 
 ### File Structure
-Create a directory to work in. Name it whatever you want. We're going to create two folders and two files.
-1. Folder one is called static. This will hold CSS and other static files.
-2. Folder two is called templates. This will hold our HTML. It's like views in Express :smiling_imp:
+Create a directory to work in. Name it whatever you want. In there we're going to create two directories and two files.
+1. The first directory is called templates. This will hold our HTML. It's like views in Express :smiling_imp:
+2. The second directory is called static. This will hold CSS and other static files.
 3. File one is called app.py. It's like server.js :smiling_imp:
 4. File two is called db.py. Yep, you guessed it, it's our model and controller rolled into one. :smiling_imp:
+
+### Templates
+
+First things first, lets kick it off with some good ol' HTML. 
+
+If you haven't already, make a `templates/` directory. We are going to break our HTML up so also add a `partials/` directory inside of `templates/`.
+
+#### Partials
+
+##### Head
+
+We are going to add some cool scripts and styling to let our flask app run and look great!
+
+In our `templates/partials/` directory, make a `templates/partials/head.html` file. 
+
+<details>
+ <summary>Go ahead and throw this in there</summary>
+
+```html
+<head>
+    <title>Hot Cocoa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
+</head>
+```
+</details>
+
+##### Nav
+
+We are also going to make a nav bar that lets us jump to our favorite books in our library. 
+
+Make a new file `templates/partials/nav.html` and add a `nav` element containing a `div`. 
+In this `div`, we are going to want a link to `/` that has `class="brand-logo"` with the text `Home`.
+We also want to have a `ul` with `id="nav-mobile"`, `class="right"` and a `li` with a link to `/favorites`.
+ 
+<details>
+<summary>Click here if you forgot all your html :clown_face:</summary>
+
+```html
+<nav>
+    <div>
+      <a href="/" class="brand-logo">Home</a>
+      <ul id="nav-mobile" class="right">
+        <li><a href="/favourites">Favourites</a></li>    
+      </ul>
+    </div>
+  </nav>
+```
+</details>
+
+### Home Page
+
+
+### Favorites Page
+
+### Static
+
+Now, make a 'static/' directory. In that directory, add a 'static/style.css' file and add the styling below into there. 
+
+<details>
+ <summary>For brevity's sake, here is some styling:</summary>
+
+```css
+body {
+    background-color: rgb(26, 19, 0);
+    color: rgb(255, 255, 255);
+    margin: 0 10px;
+}
+nav, button {
+    background-color: rgb(105, 6, 13);
+    border-width: 0;
+    border-radius: 8px;
+    padding: 7px;
+}
+h1 {
+    font-size: 25px;
+}
+i {
+    cursor: pointer;
+}
+.shelf {
+    display: flex;
+    flex-flow: row wrap;
+}
+.book {
+    padding: 15px;
+}
+.options {
+    display: flex;
+}
+```
+</details>
+
 
 ### db.py
 Let's start in db.py. If you would like to start with app.py, scroll on ahead, but it can be grounding to know what your database is doing. First we're going to need something from pymongo.
