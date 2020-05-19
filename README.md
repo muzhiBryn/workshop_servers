@@ -558,7 +558,7 @@ pip freeze > requirements.txt
 uri = os.environ.get('MONGODB_URI', 'mongodb://localhost')
 client = MongoClient(uri)
 ```
-4. After deploying (and adding mlab as a resource), go to your config vars and add this to the end of your MONGODB_URI config var (&retryWrites=false)
+4. After deploying (and adding mlab as a resource), go to your config vars and add this to the end of your MONGODB_URI config var (?authSource={database_name}&retryWrites=false)
 
 All done!
 
