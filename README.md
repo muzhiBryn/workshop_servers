@@ -108,6 +108,10 @@ The params parameter is optional. If you intend to use it, you will need to defi
  <summary>try it first</summary>
 
  ```python
+ # you'll need this
+ROOT_URL = 'https://www.googleapis.com/books/v1/volumes'
+params = {'maxResults': 40}
+
 def search_title(name):
     name = '+'.join(name.split(' '))
     r = requests.get(ROOT_URL + '?q=' + name + '&key=' + API_KEY, params=params)
