@@ -545,9 +545,9 @@ Congrats! You deployed your first Flask app!
 
 ## Summary / What you Learned
 
-* [ ] Deploy a web app using the Flask framework
-* [ ] Using Mongodb to store data with the pymongo package
-* [ ] Routing with an API in Flask
+* [x] Deploy a web app using the Flask framework
+* [x] Using Mongodb to store data with the pymongo package
+* [x] Routing with an API in Flask
 
 ## Reflection
 
