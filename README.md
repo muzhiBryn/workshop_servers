@@ -55,7 +55,7 @@ Next, we want to create a database, and then a collection. Use the dot notation 
  <summary>Here's the second one. But try it first!</summary>
 
  ```python
-bookshelf = db.bookshelf
+favourites = db.favourites
  ```
 </details>
 The variable names could be literally anything. In our example, if you open up MongoDB Compass (or use the CLI), you'll find that there is now a database called database, and inside that, there is a collection called bookshelf.
@@ -65,16 +65,24 @@ And that's it for the model. We're not going to create a Schema. We're just goin
 #### Controller
 We're still in db.py. We want the functions that will directly manipulate our database now. Can you think of any? Well, we're going to be searching for books with the Books API, and then we'll add those to our library. We'll also want to be able to kick books out of our library. Yep, add and kick functions. Or delete, if you want to be boring. Mongoose, I mean, pymongo, has methods called insert_one, and delete_one. :smiling_imp: They behave like pymongo, I mean, mongoose.
 
+Note: delete is fairly straightforward (one line), but add has a little trick to it. In our database, we will not be using Mongo-generated IDs, and will instead be using the ids that come with the Google objects for two reasons:
+1. We already know they are unique
+2. We want the ids to be the same across both our database and in the database of books we're querying.
+
+In addition, since clicking a book adds it, and we can click on the same book twice and cause Mongo DB to yell at us because we're trying to add an id that already exists, so first check that the id doesn't already exist. Do that using pymongo's count_documents.
+
 <details>
  <summary>Here, in case</summary>
 
  ```python
 def add_book(book):
-  bookshelf.insert_one(book)
+  if favourites.count_documents({ '_id': book['id'] }, limit = 1) == 0:
+        book['_id'] = book['id']
+        favourites.insert_one(book)
 ```
 ```python
 def delete_book(id):
-    bookshelf.delete_one({'_id': id})
+    favourites.delete_one({'_id': id})
  ```
 </details>
 
