@@ -127,7 +127,10 @@ At the end of your app.py, add this:
 if __name__ == '__main__':
     app.run()
  ```
- While in development mode, pass debug=True to app.run(), like so app.run(debug=True). Then to run, type in terminal: Python app.py.
+ While in development mode, pass debug=True to app.run(), like so app.run(debug=True). Then to run, type in terminal: 
+ ```console
+  Python app.py
+ ```
 
 Every function in this file should come before this if statement.
 
