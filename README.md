@@ -123,7 +123,7 @@ This is the fun part. Routing in Flask works like routing in express, except tha
 We're going to use the `@app.route()` decorator to bind a URL to a function which will return what we want to display. The first argument passed to `route()` will be the url string we are targeting. By default the route will only respond to `GET` requests, but that can be changed by providing the `methods` argument to the route() decorator. After the decorator we will define the function that will return whatever we want to render. For example:  
 
 ```python
-@app.route(‘/hello’, methods=['GET', 'POST'])
+@app.route('/hello', methods=['GET', 'POST'])
 def hello_world():
    return ‘hello world’
  ```
