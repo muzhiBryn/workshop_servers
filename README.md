@@ -119,13 +119,17 @@ def search_title(name):
  ```
 </details>
 
+We also want a default search term. So go ahead and call your function on your favourite book title. Assign the results to some variable.
+
+## Running your flask app
 At the end of your app.py, add this:
 ```python
 if __name__ == '__main__':
     app.run()
  ```
+ While in development mode, pass debug=True to app.run(), like so app.run(debug=True). Then to run, type in terminal: Python app.py.
 
-We also want a default search term. So go ahead and call your function on your favourite book title. Assign the results to some variable.
+Every function in this file should come before this if statement.
 
 #### routing :smiling_imp:
 This is the fun part. Routing in Flask works like routing in express, except that you are required to return something to the view, even if you just perform an action like delete. For that case, there's a special empty return statement ('', 204) that translates to "all good. nothing to see here". 
