@@ -119,6 +119,12 @@ def search_title(name):
  ```
 </details>
 
+At the end of your app.py, add this:
+```python
+if __name__ == '__main__':
+    app.run()
+ ```
+
 We also want a default search term. So go ahead and call your function on your favourite book title. Assign the results to some variable.
 
 #### routing :smiling_imp:
@@ -155,7 +161,12 @@ def home_page():
 </details>
 
 ##### Favourites
-Here want to respond to `GET` requests on the URL `/favourites` and render our `favs.html` template with all our favourite books.
+Here want to respond to `GET` requests on the URL `/favourites` and render our `favs.html` template with all our favourite books. Here, you will need a get_all function from db.py. Go there and add this now
+```python
+def get_all():
+    return favourites.find({})
+```
+
 <details>
  <summary>try it first</summary>
 
@@ -166,6 +177,7 @@ def favourites():
     return render_template('favs.html', all=all)
  ```
 </details>
+
 
 ##### add/<:id>
 Here want to respond to `POST` requests and add the book with the given id to our database. We don't actually want to render anything so we just return the special empty return statement that we mentioned before.
@@ -196,12 +208,6 @@ def delete(id):
     return ('', 204)
  ```
 </details>
-
-At the end of your app.py, add this:
-```python
-if __name__ == '__main__':
-    app.run()
- ```
 
 ### Templates
 
