@@ -20,11 +20,12 @@ Then we're going to build a library. A...what? A library. Except you can't read 
 ## Setup
 
 Let's get all the tools we need. Head to the terminal.
-1. Flask and Pymongo. Run
+1. Get Flask and Pymongo. Run
 ```console
 pip install Flask
 python -m pip install pymongo
 ```
+pip comes with python, so if you have python, you have pip. We will be using python 3.7 and the latest version of pip. However, if you have python 3.6 you should have no problem.
 
 2. If you read Flask tutorials, you'll see that a lot of them use virtual environments. We will not be doing that in this tutorial. The benefit of virtual environments is that it you can work on isolated projects with different dependencies at the same time. So, if you are already using a different version of flask, feel free to use virtual environments!
 3. Get an API key for Google Books. We've done this a bunch of times, from YouTube to the ML tutorial. Go [here](https://console.developers.google.com/), in APIs and Services, search for Books. Enable the API. Then to to Credentials. Click on Create Credentials, select api key, restrict it to the Books API, then write it down somewhere.
@@ -544,6 +545,22 @@ i {
 }
 ```
 </details>
+
+### Deployment
+If you're curious about how to deploy your new Flask app, you can easily deploy it with heroku as well. You'll need a few things:
+1. A Procfile that just contains this: web: gunicorn app:app
+2. A requirements.txt file. Generate this with this command:
+```console
+pip freeze > requirements.txt
+```
+3. In db.py, modify your client to look like this:
+```python
+uri = os.environ.get('MONGODB_URI', 'mongodb://localhost')
+client = MongoClient(uri)
+```
+4. After deploying (and adding mlab as a resource), go to your config vars and add this to the end of your MONGODB_URI config var (&retryWrites=false)
+
+All done!
 
 :checkered_flag: Finally, if all went well, your page should look something like this:
 
