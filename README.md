@@ -4,7 +4,7 @@ Do you remember this other language from CS1? What was it called again. Ah yes, 
 
 ![yes gif](https://media.giphy.com/media/Pd8Bf06Sas4yQ/giphy.gif)
 
-Are you ready to leave semicolons and curly braces behind?
+Test:Are you ready to leave semicolons and curly braces behind?
 
 ![it's about time](https://media.giphy.com/media/jVStxzak9yk2Q/giphy.gif)
 
